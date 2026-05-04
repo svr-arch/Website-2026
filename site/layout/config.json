@@ -1,24 +1,23 @@
 {
   "navbar": [
     { "Announcements": "announcement.html" },
-    { "About": "index.html" },
     { "Manifesto": "manifesto.html" },
     { "Members": "members.html" },
     { "Events": "collections/events.html" },
     { "Blogs": "collections/blogs.html" },
     { "Contact": "contact.html" }
   ],
-  "baseURL": "https://anna-docs.netlify.app",
-  "siteTitle": "anna-docs",
+  "baseURL": "https://acmpesuecc.github.io/Website-2026/",
+  "siteTitle": "PES University EC Campus ACM Student Chapter",
   "siteScripts": null,
-  "author": "anna",
-  "themeURL": null,
+  "author": "PES University EC Campus ACM Student Chapter",
   "copyright": "This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International.",
   "customFields": {
-    "Github": "https://github.com/anna-ssg/anna"
+    "Github": "https://github.com/acmpesuecc/Website-2026"
   },
   "collectionLayouts": {
     "collections/blogs.html": "all-posts",
-    "collections/events.html": "all-events"
+    "collections/events.html": "all-events",
+    "collections/members.html": "all-members"
   }
 }
