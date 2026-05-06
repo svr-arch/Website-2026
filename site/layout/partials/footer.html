@@ -41,23 +41,6 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
     </button>
 
-    <script>(function () { var el = document.getElementById('site-year'); if (el) el.textContent = new Date().getFullYear(); })();
-        (function () {
-            var ham = document.getElementById('hamburger'); if (!ham) return;
-            function setNavStateOnLoadOrResize() {
-                document.body.classList.remove('nav-open');
-                ham.setAttribute('aria-expanded', 'false');
-            }
-            function toggleNav() {
-                var isOpen = document.body.classList.toggle('nav-open');
-                ham.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            }
-            setNavStateOnLoadOrResize();
-            ham.addEventListener('click', toggleNav);
-            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { document.body.classList.remove('nav-open'); ham.setAttribute('aria-expanded', 'false'); } });
-            window.addEventListener('resize', setNavStateOnLoadOrResize);
-            document.addEventListener('click', function (e) { if (!document.body.classList.contains('nav-open')) return; if (!e.target.closest || !e.target.closest('.site-header')) { document.body.classList.remove('nav-open'); ham.setAttribute('aria-expanded', 'false'); } });
-        })();
-    </script>
+    <script>(function () { var el = document.getElementById('site-year'); if (el) el.textContent = new Date().getFullYear(); })();</script>
 </footer>
 {{end}}

@@ -1,51 +1,76 @@
-window.addEventListener('keydown', (e) => {
-  const lastWindow = document.querySelector('.niri-window:last-child');
-  const helpModal = document.getElementById('help-modal');
+// 2D Niri Hypermedia Logic
 
-  if (e.shiftKey && e.key === 'Q') {
-    if (document.querySelectorAll('.niri-window').length > 1) lastWindow.remove();
-  } else if (e.shiftKey && e.key === 'F') {
-    lastWindow?.classList.toggle('w-full');
-  } else if (e.key.toLowerCase() === 'd') {
-    document.body.classList.toggle('overview-mode');
-  } else if (e.key === '/') {
-    helpModal.open ? helpModal.close() : helpModal.showModal();
-    e.preventDefault();
+// Target switching: Main pages spawn new ribbons, sub-pages append to current ribbon
+document.addEventListener('fx:config', (e) => {
+  const trigger = e.detail.cfg.trigger;
+  if (!trigger) return;
+  const elt = trigger.target.closest('[fx-action]');
+  if (!elt) return;
+
+  if (elt.hasAttribute('fx-main-page')) {
+    e.detail.cfg.target = document.getElementById('niri-track-v');
+    e.detail.cfg.swap = 'beforeend';
+  } else {
+    const track = elt.closest('.niri-horizontal-track');
+    if (track) {
+      e.detail.cfg.target = track;
+      e.detail.cfg.swap = 'beforeend';
+    }
   }
 });
 
-document.addEventListener('click', (e) => {
-  const closeBtn = e.target.closest('.mobile-close-btn');
-  if (closeBtn) {
-    const win = closeBtn.closest('.niri-window');
-    if (document.querySelectorAll('.niri-window').length > 1) win.remove();
-  }
+function injectCloseBtn(container) {
+  const wins = container.querySelectorAll('.niri-window');
+  wins.forEach(win => {
+    if (!win.querySelector('.mobile-close-btn')) {
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'mobile-close-btn';
+      closeBtn.innerHTML = '×';
+      closeBtn.setAttribute('aria-label', 'Close window');
+      win.prepend(closeBtn);
+    }
+  });
+}
 
-  const fab = e.target.closest('.fab-overview');
-  if (fab) {
-    document.body.classList.toggle('overview-mode');
-  }
-});
-
-// Fixi hook to ensure new windows are scrolled into view natively via scroll-snap
-document.addEventListener('fx:end', () => {
-  const track = document.getElementById('niri-track');
-  if (track) track.scrollLeft = track.scrollWidth;
-});
-
-// Fixi hook to strip full page shell and only append .niri-window content
+// Shell stripping and Mobile injection
 document.addEventListener('fx:after', (e) => {
+  const trigger = e.detail.cfg.trigger;
+  const elt = trigger?.target.closest('[fx-action]');
   const parser = new DOMParser();
   const doc = parser.parseFromString(e.detail.cfg.text, 'text/html');
   const content = doc.querySelector('.niri-window');
-  if (content) {
-    const closeBtn = document.createElement('button');
-    closeBtn.className = 'mobile-close-btn';
-    closeBtn.innerHTML = '×';
-    closeBtn.setAttribute('aria-label', 'Close window');
-    content.prepend(closeBtn);
 
-    e.detail.cfg.text = content.outerHTML;
+  if (content) {
+    if (elt && elt.hasAttribute('fx-main-page')) {
+      const ribbon = document.createElement('div');
+      ribbon.className = 'niri-horizontal-track';
+      ribbon.appendChild(content);
+      injectCloseBtn(ribbon);
+      e.detail.cfg.text = ribbon.outerHTML;
+    } else {
+      const temp = document.createElement('div');
+      temp.appendChild(content);
+      injectCloseBtn(temp);
+      e.detail.cfg.text = temp.innerHTML;
+    }
   }
 });
 
+// Native scroll snapping focus
+document.addEventListener('fx:end', (e) => {
+  const target = e.detail.cfg.target;
+  if (target) {
+    if (target.id === 'niri-track-v') {
+      target.scrollTop = target.scrollHeight;
+    } else {
+      target.scrollLeft = target.scrollWidth;
+    }
+  }
+});
+
+// Initial injection
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => injectCloseBtn(document.body));
+} else {
+  injectCloseBtn(document.body);
+}

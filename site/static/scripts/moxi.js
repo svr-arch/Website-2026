@@ -11,7 +11,7 @@
                 recs.forEach(r=>r.type == "childList" && r.addedNodes.forEach(n=>process(n)))
                 recompute()
         })
-        let AF = async function(){}.constructor, HARGS = ["q", "wait", "trigger", "debounce"],
+        let AF = async function(){}.constructor, HARGS = ["q", "wait", "trigger", "debounce", "evt"],
         fire = (elt, type, detail, bub)=>elt.dispatchEvent(new CustomEvent(type, {detail, cancelable:1, bubbles:bub??1, composed:1})),
         el = (e,n,h,o)=>e.addEventListener(n,h,o),
         DB = Symbol(),
@@ -31,6 +31,7 @@
                                 for (let e of typeof from == "string" ? doc.querySelectorAll(from) : from) e.classList.remove(cls)
                                 for (let e of elts) e.classList.add(cls)
                         }
+                        if (p == "last") return elts[elts.length - 1]
                         let v = elts[0]?.[p]
                         if (v?.call) return (...a)=>elts.map(e=>e[p](...a))[0]
                         if (v && typeof v == "object") return proxy(elts.map(e=>e[p]))
@@ -61,7 +62,7 @@
                 if (ignore(elt)) return
                 let trigger = attrName.split("-").slice(1).join("-"),
                 debounce = mkDb(), h = async (evt)=>{
-                        try { await new AF(...HARGS, attr)(mkq(elt), mkWait(elt), (t,d,b)=>fire(elt,t,d,b), debounce) }
+                        try { await new AF(...HARGS, attr)(mkq(elt), mkWait(elt), (t,d,b)=>fire(elt,t,d,b), debounce, evt) }
                         catch(e){ if (e !== DB) throw e }
                 }
                 if (trigger == "live") liveFns.add(h)

@@ -2,35 +2,60 @@
 {{$PageData := index .DeepDataMerge.Templates .PageURL}}
 {{ template "head" .}}
 
-<body class="site-body">
+<body class="site-body" 
+    on-keydown="
+        if(evt.shiftKey && evt.key == 'Q') {
+            let win = q('.niri-window').last;
+            if(q('.niri-window').count > 1) {
+                let track = win.closest('.niri-horizontal-track');
+                if(track.id !== 'niri-track-h-root' && track.querySelectorAll('.niri-window').length === 1) {
+                    track.remove();
+                } else {
+                    win.remove();
+                }
+            }
+        }
+        if(evt.shiftKey && evt.key == 'F') {
+            let win = q('.niri-window').last;
+            if(win) win.classList.toggle('w-full');
+        }
+        if(evt.key == 'd') {
+            document.body.classList.toggle('overview-mode');
+        }
+        if(evt.key == '/') {
+            let m = q('#help-modal')[0];
+            if(m) m.open ? m.close() : m.showModal();
+            evt.preventDefault();
+        }
+    "
+    on-click="
+        let fab = evt.target.closest('.fab-overview');
+        if(fab) document.body.classList.toggle('overview-mode');
+        
+        let closeBtn = evt.target.closest('.mobile-close-btn');
+        if(closeBtn) {
+            let win = closeBtn.closest('.niri-window');
+            if(q('.niri-window').count > 1) {
+                let track = win.closest('.niri-horizontal-track');
+                if(track.id !== 'niri-track-h-root' && track.querySelectorAll('.niri-window').length === 1) {
+                    track.remove();
+                } else {
+                    win.remove();
+                }
+            }
+        }
+    "
+>
 
-    {{template "header" .}}
-    <main class="niri-track-container" id="niri-track">
-        <section class="niri-window container site-main" role="main">
-            <article class="content">
-                <section class="body">
+    <main class="niri-vertical-track" id="niri-track-v">
+        <div class="niri-horizontal-track" id="niri-track-h-root">
+            <section class="niri-window container site-main" role="main">
+                <article class="content">
+                    <section class="body">
 
                 {{ if ne (len $PageData.Frontmatter.Title) 0 }}
                 <div class="post-description">
                     <h1>{{ $PageData.Frontmatter.Title }}</h1>
-                    <div class="page-date">
-                        {{ if ne (len $PageData.Frontmatter.Date) 0 }}
-                        Published on {{$PageData.Frontmatter.Date}}
-                        {{end}}
-                    </div>
-                    <div class="authors-placeholder">
-                        {{ if ne (len $PageData.Frontmatter.Authors) 0 }}
-                        <p>Authors: {{range $i, $a := $PageData.Frontmatter.Authors}}{{if $i}}, {{end}}{{ $a }}{{end}}
-                        </p>
-                        {{ end }}
-                    </div>
-                    <div class="tags-placeholder">
-                        {{ if ne (len $PageData.Frontmatter.Tags) 0 }}
-                        {{range $PageData.Frontmatter.Tags}}
-                        <a class="tag" href="/tags/{{.}}.html">{{.}}</a>
-                        {{end}}
-                        {{ end }}
-                    </div>
                 </div>
                 {{ end }}
 
@@ -67,10 +92,9 @@
 {{ end }}
             </section>
         </article>
-
-        {{ if ne (len $PageData.Frontmatter.Tags) 0 }}
-        {{ end }}
-    </main>
+    </section>
+    </div>
+</main>
 
     {{template "footer" .}}
 </body>
