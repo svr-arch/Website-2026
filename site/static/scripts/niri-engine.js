@@ -14,6 +14,19 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
+document.addEventListener('click', (e) => {
+  const closeBtn = e.target.closest('.mobile-close-btn');
+  if (closeBtn) {
+    const win = closeBtn.closest('.niri-window');
+    if (document.querySelectorAll('.niri-window').length > 1) win.remove();
+  }
+
+  const fab = e.target.closest('.fab-overview');
+  if (fab) {
+    document.body.classList.toggle('overview-mode');
+  }
+});
+
 // Fixi hook to ensure new windows are scrolled into view natively via scroll-snap
 document.addEventListener('fx:end', () => {
   const track = document.getElementById('niri-track');
@@ -26,6 +39,12 @@ document.addEventListener('fx:after', (e) => {
   const doc = parser.parseFromString(e.detail.cfg.text, 'text/html');
   const content = doc.querySelector('.niri-window');
   if (content) {
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'mobile-close-btn';
+    closeBtn.innerHTML = '×';
+    closeBtn.setAttribute('aria-label', 'Close window');
+    content.prepend(closeBtn);
+
     e.detail.cfg.text = content.outerHTML;
   }
 });

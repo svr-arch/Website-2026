@@ -1,40 +1,9 @@
 ---
-title: "Members"
-layout: all-members
-customFields:
-  - name: "Vinaayak"
-    designation: "Chair"
-    photo: "vinaayak.jpg"
-    github: "https://github.com/username"
-    linkedin: "https://www.linkedin.com/in/example"
-  - name: "Ashmita"
-    designation: "Vice Chair"
-    photo: "ashmita.jpg"
-    github: "https://github.com/username"
-    linkedin: "https://www.linkedin.com/in/example"
-  - name: "Lakshit"
-    designation: "Secretary"
-    photo: "lakshit.jpg"
-    github: "https://github.com/username"
-    linkedin: "https://www.linkedin.com/in/example"
-  - name: "Shivangi"
-    designation: "Treasurer"
-    photo: "shivangi.jpg"
-    github: "https://github.com/username"
-    linkedin: "https://www.linkedin.com/in/example"
-  - name: "Saankhya"
-    designation: "Webmaster"
-    photo: "saankhya.jpg"
-    github: "https://github.com/username"
-    linkedin: "https://www.linkedin.com/in/example"
-  - name: "Andey"
-    designation: "Webmaster"
-    photo: "andey.jpg"
-    github: "https://github.com/username"
-    linkedin: "https://www.linkedin.com/in/example"
-  - name: "Bhuvigna"
-    designation: "Membership Chair"
-    photo: "bhuvigna.jpg"
-    github: "https://github.com/username"
-    linkedin: "https://www.linkedin.com/in/example"
+title: "Members Directory"
+layout: page
 ---
+
+<div class="menu-list" style="display:flex; flex-direction:column; gap:1.5rem; align-items:center; margin-top:3rem;">
+  <a href="/members/core.html" class="m-link" fx-action="/members/core.html" fx-target="#niri-track" fx-swap="beforeend">Core Committee</a>
+  <a href="/members/general.html" class="m-link" fx-action="/members/general.html" fx-target="#niri-track" fx-swap="beforeend">General Members</a>
+</div>

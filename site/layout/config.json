@@ -1,7 +1,7 @@
 {
   "navbar": [
     { "Announcements": "announcement.html" },
-    { "Manifesto": "manifesto.html" },
+    { "About": "about.html" },
     { "Members": "members.html" },
     { "Events": "collections/events.html" },
     { "Blogs": "collections/blogs.html" },

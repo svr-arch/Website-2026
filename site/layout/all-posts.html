@@ -7,7 +7,7 @@
         <article class="content">
             <section class="blogs-list">
                 {{range $Post := index .DeepDataMerge.CollectionsMap .PageURL}}
-                <a class="blog-card" href="/{{$Post.CompleteURL}}">
+                <a class="blog-card" href="/{{$Post.CompleteURL}}" fx-action="/{{$Post.CompleteURL}}" fx-target="#niri-track" fx-swap="beforeend">
                     <div class="blog-card-inner">
                         <div class="blog-thumb">
                             {{ if $Post.Frontmatter.PreviewImage }}
