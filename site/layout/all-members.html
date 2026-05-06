@@ -4,8 +4,9 @@
 <body class="site-body">
     <main class="niri-vertical-track" id="niri-track-v">
         <div class="niri-horizontal-track" id="niri-track-h-root">
-            <section class="niri-window container site-main" role="main">
-                <article class="content">
+            <section class="niri-window" role="main" tabindex="-1">
+                <div class="container site-main">
+                    <article class="content">
 
                     <h2>{{$PageData.Frontmatter.Title}}</h2>
                     <section class="member-cards">
@@ -45,7 +46,8 @@
                         {{end}}
                     </section>
 
-                </article>
+                    </article>
+                </div>
             </section>
         </div>
     </main>

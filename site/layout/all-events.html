@@ -2,30 +2,41 @@
 {{$PageData := index .DeepDataMerge.Collections .PageURL}}
 {{ template "head" .}}
 <body class="site-body">
-    {{template "header" .}}
-    <main class="container site-main" role="main">
-        <article class="content">
-            <section class="events-grid">
-                {{range $Post := index .DeepDataMerge.CollectionsMap .PageURL}}
-                <a class="event-card" href="/{{$Post.CompleteURL}}">
-                    <div class="event-card-inner">
-                        <div class="event-thumb">
-                            {{ if $Post.Frontmatter.PreviewImage }}
-                                <img src="{{$Post.Frontmatter.PreviewImage}}" alt="pixel art"/>
-                            {{ else }}
-                                <img src="/static/images/placeholder.png" alt="pls tell me what to put here"/>
-                            {{ end }}
-                        </div>
-                        <div class="event-info">
-                            <h3>{{$Post.Frontmatter.Title}}</h3>
-                            <p>{{$Post.Frontmatter.Description}}</p>
-                            <span class="event-date">{{$Post.Frontmatter.Date}}</span>
-                        </div>
-                    </div>
-                </a>
+    <main class="niri-vertical-track" id="niri-track-v">
+        <div class="niri-horizontal-track" id="niri-track-h-root">
+            <section class="niri-window" role="main" tabindex="-1">
+                <div class="container site-main">
+                    <article class="content">
+                        <section class="events-grid">
+                {{range $key, $events := .DeepDataMerge.CollectionsMap}}
+                    {{if eq $key "collections/events.html"}}
+                        {{range $Post := $events}}
+                            {{if ne $Post.Frontmatter.Title "anna"}}
+                            <a class="event-card" href="/{{$Post.CompleteURL}}" fx-action="/{{$Post.CompleteURL}}">
+                                <div class="event-card-inner">
+                                    <div class="event-thumb">
+                                        {{ if $Post.Frontmatter.PreviewImage }}
+                                            <img src="{{$Post.Frontmatter.PreviewImage}}" alt="pixel art"/>
+                                        {{ else }}
+                                            <img src="/static/images/placeholder.png" alt="pls tell me what to put here"/>
+                                        {{ end }}
+                                    </div>
+                                    <div class="event-info">
+                                        <h3>{{$Post.Frontmatter.Title}}</h3>
+                                        <p>{{$Post.Frontmatter.Description}}</p>
+                                        <span class="event-date">{{$Post.Frontmatter.Date}}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            {{end}}
+                        {{end}}
+                    {{end}}
                 {{end}}
+                        </section>
+                    </article>
+                </div>
             </section>
-        </article>
+        </div>
     </main>
     {{template "footer" .}}
 </body>

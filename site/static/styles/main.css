@@ -1,13 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=PT+Mono&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
 
 :root {
     --font-family-sans:
-        "Roboto Mono","Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
-        Arial, "Noto Sans", sans-serif;
+        "Roboto Mono", "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     --font-family-serif: "Lora", Georgia, "Times New Roman", Times, serif;
     font-family: var(--font-family-serif);
 }
@@ -25,6 +24,7 @@ b {
 
 html {
     height: 100%;
+    background-color: #000c23;
 }
 
 body {
@@ -38,12 +38,32 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.7;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body.overview-mode {
-    transform: scale(0.4);
+    zoom: 0.4;
     overflow: visible;
+}
+
+body.overview-mode .niri-vertical-track,
+body.overview-mode .niri-horizontal-track {
+    width: max-content;
+    height: max-content;
+    min-height: 0;
+    overflow: visible;
+}
+
+body.overview-mode .site-header {
+    display: none;
+}
+
+body.overview-mode .site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    zoom: 2.5;
+    z-index: 2000;
 }
 
 .niri-vertical-track {
@@ -55,6 +75,7 @@ body.overview-mode {
     overflow-x: hidden;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
+    transition: transform 0.5s;
 }
 
 .niri-horizontal-track {
@@ -66,28 +87,43 @@ body.overview-mode {
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-snap-align: start;
+    scroll-behavior: smooth;
     border-bottom: 1px solid rgba(0, 170, 254, 0.2);
+    gap: 1.5rem;
+    padding: 1.5rem;
+    box-sizing: border-box;
 }
 
 .niri-window {
-    flex: 0 0 50vw;
-    height: 100vh;
+    flex: 0 0 calc(50vw - 2.25rem);
+    height: calc(100vh - 3rem);
     overflow-y: auto;
     scroll-snap-align: center;
-    border-right: 1px solid rgba(0, 170, 254, 0.2);
+    border: 1px solid rgba(0, 170, 254, 0.2);
+    border-radius: 16px;
     box-sizing: border-box;
-    transition: flex-basis 0.3s ease;
+    transition:
+        flex-basis 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
     background: #000c23;
     padding: 2rem;
 }
 
+.niri-window:focus,
+.niri-window:focus-within {
+    outline: none;
+    border-color: #00aafe;
+    box-shadow: 0 0 15px rgba(0, 170, 254, 0.3);
+}
+
 .niri-window.w-full {
-    flex-basis: 100vw;
+    flex-basis: calc(100vw - 3rem);
 }
 
 @media (max-width: 768px) {
     .niri-window {
-        flex-basis: 100vw;
+        flex-basis: calc(100vw - 3rem);
     }
 }
 
@@ -257,7 +293,7 @@ pre {
     box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
 }
 
-pre>code {
+pre > code {
     white-space: pre;
     /* ensure code inside pre does not wrap */
     display: block;
@@ -305,7 +341,7 @@ pre>code {
 figure {
     margin: 0;
 
-    &>figcaption>* {
+    & > figcaption > * {
         margin: 0;
     }
 }
@@ -323,8 +359,6 @@ img {
     object-position: center center;
 }
 
-
-
 blockquote {
     margin: 1rem 0;
     padding: 0.75rem 1.2rem;
@@ -339,13 +373,13 @@ blockquote {
     /* allow narrow horizontal scroll inside the quote */
 }
 
-blockquote>* {
+blockquote > * {
     margin: 0;
 }
 
 /* Ensure any code or pre elements inside a blockquote do not push layout */
 
-blockquote>* {
+blockquote > * {
     color: var(--color-text);
 }
 
@@ -369,7 +403,6 @@ h6 {
     font-weight: 600;
     color: var(--color-primary);
     line-height: 1.2;
-    
 }
 
 /* Improved heading scale for docs (reduced for tighter layout) */
@@ -424,28 +457,26 @@ h1#table-of-contents {
     font-weight: 700;
 }
 
-h1#table-of-contents+ul {
+h1#table-of-contents + ul {
     margin-top: 0.6rem;
     margin-bottom: 1.2rem;
     padding-left: 1.25rem;
 }
 
-h1#table-of-contents+ul li {
+h1#table-of-contents + ul li {
     margin: 0.5rem 0;
 }
 
-h1#table-of-contents+ul a {
+h1#table-of-contents + ul a {
     color: var(--color-primary-dim);
     text-decoration: none;
     border-bottom: none;
 }
 
-h1#table-of-contents+ul a:hover {
+h1#table-of-contents + ul a:hover {
     color: var(--color-primary);
     text-decoration: underline;
 }
-
-
 
 /* Content paragraphs and lists spacing */
 p {
@@ -483,13 +514,15 @@ pre {
     /* keep layout tidy; inner code scrolls */
 }
 
-pre>code,
+pre > code,
 pre code {
     display: block;
     margin: 0;
     padding: 0;
     /* rely on pre padding */
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono",
+        "Courier New", monospace;
     font-size: 1.02rem;
     line-height: 1.6;
     white-space: pre;
@@ -523,7 +556,10 @@ pre .copy-button {
     align-items: center;
     justify-content: center;
     box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06);
-    transition: transform 0.12s ease, background 0.12s ease, color 0.12s ease;
+    transition:
+        transform 0.12s ease,
+        background 0.12s ease,
+        color 0.12s ease;
 }
 
 pre button[class*="copy"]:hover,
@@ -543,31 +579,31 @@ pre .hljs-copy svg {
     display: block;
 }
 
-p>code,
-li>code,
-dd>code,
-td>code,
-h1>code,
-h2>code,
-h3>code,
-h4>code,
-a>code {
+p > code,
+li > code,
+dd > code,
+td > code,
+h1 > code,
+h2 > code,
+h3 > code,
+h4 > code,
+a > code {
     padding: 0.15rem 0.5rem;
     border-radius: 6px;
 }
 
-h1>i,
-h1>em,
-h2>i,
-h2>em,
-h3>i,
-h3>em,
-h4>i,
-h4>em,
-h5>i,
-h5>em,
-h6>i,
-h6>em {
+h1 > i,
+h1 > em,
+h2 > i,
+h2 > em,
+h3 > i,
+h3 > em,
+h4 > i,
+h4 > em,
+h5 > i,
+h5 > em,
+h6 > i,
+h6 > em {
     font-family: InterItalic, sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -648,7 +684,6 @@ nav a:visited,
 }
 
 @media (max-width: 900px) {
-
     /* Mobile: keep nav collapsed by default; reveal in-flow on `nav-open` */
     .site-nav {
         display: flex;
@@ -707,8 +742,8 @@ nav a:visited,
     }
 }
 
-nav>.navigations>.header-element,
-nav>.navigations>.header-element-author {
+nav > .navigations > .header-element,
+nav > .navigations > .header-element-author {
     font-family: Inter;
     font-size: 1.1rem;
     font-weight: 500;
@@ -720,13 +755,13 @@ nav>.navigations>.header-element-author {
     column-gap: 0.5rem;
 }
 
-.image-grid>* {
+.image-grid > * {
     display: inline-block;
     width: 100%;
     break-inside: avoid;
 }
 
-.image-grid>*>img {
+.image-grid > * > img {
     width: 100%;
     height: auto;
     display: block;
@@ -735,8 +770,6 @@ nav>.navigations>.header-element-author {
     cursor: pointer;
     transition: transform 0.2s ease;
 }
-
-
 
 iframe {
     margin-top: 0.5rem;
@@ -808,7 +841,6 @@ pre .copy-button {
 
 /* Removed right-edge mask; keep copy button flush with the card */
 @media (min-width: 481px) {
-
     pre button[class*="copy"],
     pre .hljs-copy,
     pre .copy-button {
@@ -833,7 +865,7 @@ pre {
 }
 
 /* Make inner code cooperate with narrow containers and allow scrolling within */
-pre>code,
+pre > code,
 pre .hljs,
 pre * {
     min-width: 0 !important;
@@ -841,7 +873,7 @@ pre * {
     box-sizing: border-box !important;
 }
 
-pre>code {
+pre > code {
     overflow-wrap: normal;
     white-space: pre;
     /* preserve line breaks and allow horizontal scrolling */
@@ -862,7 +894,6 @@ pre .copy-button:hover {
 }
 
 @media (max-width: 700px) {
-
     pre button[class*="copy"],
     pre .hljs-copy,
     pre .copy-button {
@@ -882,7 +913,7 @@ pre .copy-button:hover {
 /* Extra safety for very small screens: allow long code lines to wrap instead of causing
    the page to zoom or overflow. On larger screens we still prefer horizontal scrolling. */
 
-pre>code {
+pre > code {
     display: block;
     text-indent: 0;
     /* use pre to preserve whitespace so scrolling is predictable */
@@ -902,7 +933,7 @@ pre {
     /* keep copy button positioned inside the pre */
 }
 
-pre>code {
+pre > code {
     display: block;
     min-width: 100%;
     /* ensure scroller appears for long lines */
@@ -910,15 +941,15 @@ pre>code {
     box-sizing: border-box;
 }
 
-p>code,
-li>code,
-dd>code,
-td>code,
-h1>code,
-h2>code,
-h3>code,
-h4>code,
-a>code {
+p > code,
+li > code,
+dd > code,
+td > code,
+h1 > code,
+h2 > code,
+h3 > code,
+h4 > code,
+a > code {
     font-family: JuliaMono, monospace;
     color: var(--color-heading);
     background-color: var(--inline-code-bg);
@@ -1065,7 +1096,7 @@ a>code {
     --inline-code-bg: #f6f8fa;
     --selection-bg: #0969da1a;
 
-    --color-primary: #C7DBE6;
+    --color-primary: #c7dbe6;
     --color-primary-dim: #306bac;
     --color-primary-low: #0969da1a;
 
@@ -1105,7 +1136,6 @@ a>code {
 
 /* Desktop wide layout handled via .container; remove body max-width to avoid left-alignment */
 @media (min-width: 900px) {
-
     /* keep container sizing only */
     .container {
         max-width: 58rem;
@@ -1205,7 +1235,6 @@ a>code {
 }
 
 @keyframes brand-bounce {
-
     0%,
     100% {
         transform: translateY(0);
@@ -1217,7 +1246,6 @@ a>code {
 }
 
 @keyframes brand-shine {
-
     /* rest: small visible sheen, then quick strong sweep */
     0%,
     70% {
@@ -1243,7 +1271,6 @@ a>code {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
     .brand-logo,
     .brand-logo::after {
         animation: none !important;
@@ -1265,10 +1292,12 @@ a>code {
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(90deg,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.95) 50%,
-            rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.95) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
     background-size: 30% 100%;
     background-repeat: no-repeat;
     transform: translateX(-40%) skewX(-20deg);
@@ -1309,7 +1338,7 @@ a>code {
     transform: translateY(-2px);
 }
 
-.actions button>* {
+.actions button > * {
     pointer-events: none;
 }
 
@@ -1318,7 +1347,6 @@ a>code {
 }
 
 @media (min-width: 900px) {
-
     /* hide mobile hamburger on desktop */
     .hamburger {
         display: none !important;
@@ -1328,7 +1356,6 @@ a>code {
 }
 
 @media (max-width: 900px) {
-
     /* make action buttons even smaller on mobile */
     .actions button {
         width: 32px;
@@ -1337,7 +1364,6 @@ a>code {
 }
 
 @media (min-width: 900px) {
-
     /* Ensure any residual `nav-open` state does not trigger the mobile overlay on desktop */
     body.nav-open .site-nav {
         display: flex;
@@ -1390,7 +1416,9 @@ a>code {
     width: calc(100% - 2rem);
     max-width: 46rem;
     /* match container */
-    box-shadow: 0 0 20px rgba(0, 170, 254, 0.2), 0 0 40px rgba(0, 170, 254, 0.1);
+    box-shadow:
+        0 0 20px rgba(0, 170, 254, 0.2),
+        0 0 40px rgba(0, 170, 254, 0.1);
     border: 1px solid rgba(0, 170, 254, 0.4);
 
     /* center the dialog relative to the viewport */
@@ -1487,7 +1515,6 @@ a>code {
 }
 
 @keyframes float {
-
     0%,
     100% {
         transform: translate3d(0, 0, 0);
@@ -1529,7 +1556,8 @@ a>code {
 .embed-item {
     /* make the card float with a bouncy, cartoony rhythm (slower) */
     --float-duration: 7s;
-    animation: float var(--float-duration) cubic-bezier(0.22, 1.5, 0.35, 1) infinite;
+    animation: float var(--float-duration) cubic-bezier(0.22, 1.5, 0.35, 1)
+        infinite;
 }
 
 /* Slightly exaggerate the hover lift to feel playful */
@@ -1551,7 +1579,9 @@ a>code {
     display: block;
     animation: float 3s ease-in-out infinite;
     border-radius: 16px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .blog-card:hover {
@@ -1576,12 +1606,12 @@ a>code {
 }
 
 .blog-thumb img {
-    width: 60px !important; 
-    height: 60px !important; 
-    object-fit: cover !important; 
-    border-radius: 8px !important; 
-    image-rendering: pixelated !important; 
-    flex-shrink: 0 !important; 
+    width: 60px !important;
+    height: 60px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    image-rendering: pixelated !important;
+    flex-shrink: 0 !important;
 }
 
 .blog-info h3 {
@@ -1625,7 +1655,9 @@ a>code {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     animation: float 3s ease-in-out infinite;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
     height: 320px;
 }
 
@@ -1641,12 +1673,12 @@ a>code {
 }
 
 .event-thumb img {
-    width: 100% !important; 
-    height: 200px !important; 
-    object-fit: cover !important; 
-    image-rendering: pixelated !important; 
-    display: block !important; 
-    margin: 0 !important; 
+    width: 100% !important;
+    height: 200px !important;
+    object-fit: cover !important;
+    image-rendering: pixelated !important;
+    display: block !important;
+    margin: 0 !important;
 }
 
 .event-info {
