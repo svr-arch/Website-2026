@@ -9,9 +9,9 @@ layout: page
   <p class="root-tagline">Niri-inspired horizontal tiling interface.</p>
   
   <div class="root-nav">
-    <a href="/content/manifesto.html" class="m-link" fx-action fx-target="#niri-track" fx-swap="beforeend">Manifesto</a>
-    <a href="/content/members.html" class="m-link" fx-action fx-target="#niri-track" fx-swap="beforeend">Members</a>
-    <a href="/content/contact.html" class="m-link" fx-action fx-target="#niri-track" fx-swap="beforeend">Contact</a>
+    <a href="/manifesto.html" class="m-link" fx-action="/manifesto.html" fx-target="#niri-track" fx-swap="beforeend">Manifesto</a>
+    <a href="/members.html" class="m-link" fx-action="/members.html" fx-target="#niri-track" fx-swap="beforeend">Members</a>
+    <a href="/contact.html" class="m-link" fx-action="/contact.html" fx-target="#niri-track" fx-swap="beforeend">Contact</a>
   </div>
 </div>
 

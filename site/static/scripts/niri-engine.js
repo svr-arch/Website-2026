@@ -15,7 +15,18 @@ window.addEventListener('keydown', (e) => {
 });
 
 // Fixi hook to ensure new windows are scrolled into view natively via scroll-snap
-document.addEventListener('fixi:end', () => {
+document.addEventListener('fx:end', () => {
   const track = document.getElementById('niri-track');
   if (track) track.scrollLeft = track.scrollWidth;
 });
+
+// Fixi hook to strip full page shell and only append .niri-window content
+document.addEventListener('fx:after', (e) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(e.detail.cfg.text, 'text/html');
+  const content = doc.querySelector('.niri-window');
+  if (content) {
+    e.detail.cfg.text = content.outerHTML;
+  }
+});
+
