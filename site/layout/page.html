@@ -5,9 +5,10 @@
 <body class="site-body">
 
     {{template "header" .}}
-    <main class="container site-main" role="main">
-        <article class="content">
-            <section class="body">
+    <main class="niri-track-container" id="niri-track">
+        <section class="niri-window container site-main" role="main">
+            <article class="content">
+                <section class="body">
 
                 {{ if ne (len $PageData.Frontmatter.Title) 0 }}
                 <div class="post-description">

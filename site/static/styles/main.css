@@ -28,22 +28,88 @@ html {
 }
 
 body {
-    /* Make page a column flex container so footer can sit at the bottom on short pages */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding-top: 120px; /* Offset for fixed header */
+    padding-top: 70px; /* Matched header height */
     margin: 0;
+    overflow: hidden; /* Prevent body scroll, use track instead */
 
     font-size: 1.5rem;
     font-weight: 400;
     font-family: var(--font-family-sans);
-    color: #00aafe;
+    color: #a3c4ec;
     background-color: #000c23;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Improve vertical rhythm for prose */
     line-height: 1.7;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.overview-mode {
+    transform: scale(0.6);
+    overflow: visible;
+}
+
+.niri-track-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: calc(100vh - 70px);
+    width: 100vw;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    background: #000c23;
+}
+
+.niri-window {
+    flex: 0 0 50vw;
+    height: 100%;
+    overflow-y: auto;
+    scroll-snap-align: center;
+    border-right: 1px solid rgba(0, 170, 254, 0.2);
+    box-sizing: border-box;
+    transition: flex-basis 0.3s ease;
+    background: #000c23;
+}
+
+.niri-window.w-full {
+    flex-basis: 100vw;
+}
+
+@media (max-width: 900px) {
+    .niri-window {
+        flex-basis: 100vw;
+    }
+}
+
+/* Ensure help modal looks good */
+#help-modal {
+    border: 1px solid rgba(0, 170, 254, 0.4);
+    background: #000c23;
+    color: #00aafe;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 170, 254, 0.2);
+}
+
+#help-modal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+#help-modal h2 { margin-top: 0; }
+#help-modal ul { list-style: none; padding: 0; }
+#help-modal li { margin: 0.5rem 0; }
+#help-modal code { background: rgba(0, 170, 254, 0.1); padding: 0.2rem 0.4rem; border-radius: 4px; }
+#help-modal button { 
+    background: rgba(0, 170, 254, 0.2); 
+    border: 1px solid #00aafe; 
+    color: #fff; 
+    padding: 0.5rem 1rem; 
+    border-radius: 6px; 
+    cursor: pointer;
 }
 
 /* Ensure paragraphs have comfortable spacing */

@@ -23,6 +23,20 @@
             </div>
         </div>
     </div>
+    <dialog id="help-modal">
+        <div class="help-content">
+            <h2>Keyboard Shortcuts</h2>
+            <ul>
+                <li><code>Shift + Q</code>: Close current window</li>
+                <li><code>Shift + F</code>: Toggle full-width window</li>
+                <li><code>D</code>: Toggle overview mode</li>
+                <li><code>/</code>: Toggle this help menu</li>
+                <li><code>Esc</code>: Close menu/modal</li>
+            </ul>
+            <form method="dialog"><button>Close</button></form>
+        </div>
+    </dialog>
+
     <script>(function () { var el = document.getElementById('site-year'); if (el) el.textContent = new Date().getFullYear(); })();
         (function () {
             var ham = document.getElementById('hamburger'); if (!ham) return;
