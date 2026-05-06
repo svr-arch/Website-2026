@@ -1,4 +1,4 @@
-// 2D Niri Hypermedia Logic
+// 2D Niri Hypermedia Logic with paxi.js State Preservation
 
 // Target switching: Main pages spawn new ribbons, sub-pages append to current ribbon
 document.addEventListener('fx:config', (e) => {
@@ -41,9 +41,14 @@ document.addEventListener('fx:after', (e) => {
   const content = doc.querySelector('.niri-window');
 
   if (content) {
+    // Generate unique ID for paxi to track this window
+    if (!content.id) content.id = 'win-' + Math.random().toString(36).substr(2, 9);
+    
     if (elt && elt.hasAttribute('fx-main-page')) {
+      // Wrap main pages in a new horizontal track
       const ribbon = document.createElement('div');
       ribbon.className = 'niri-horizontal-track';
+      ribbon.id = 'track-' + Math.random().toString(36).substr(2, 9);
       ribbon.appendChild(content);
       injectCloseBtn(ribbon);
       e.detail.cfg.text = ribbon.outerHTML;
