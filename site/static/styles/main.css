@@ -41,29 +41,32 @@ body {
 }
 
 body.overview-mode {
-    zoom: 0.4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+body.overview-mode .niri-vertical-track {
+    transform: scale(0.4);
+    transform-origin: center;
     overflow: visible;
 }
 
-body.overview-mode .niri-vertical-track,
 body.overview-mode .niri-horizontal-track {
-    width: max-content;
-    height: max-content;
-    min-height: 0;
     overflow: visible;
 }
 
-body.overview-mode .site-header {
-    display: none;
+body.overview-mode .niri-window {
+    cursor: pointer;
+}
+
+body.overview-mode .niri-window > * {
+    pointer-events: none;
 }
 
 body.overview-mode .site-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    zoom: 2.5;
-    z-index: 2000;
+    display: none;
 }
 
 .niri-vertical-track {
