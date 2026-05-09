@@ -5,14 +5,7 @@
     on-keydown="
         if(evt.shiftKey && evt.key === 'Q') {
             let win = document.activeElement.closest('.niri-window') || document.querySelector('.niri-window:last-child');
-            if(win && win.id !== 'root-window' && document.querySelectorAll('.niri-window').length > 1) {
-                let track = win.closest('.niri-horizontal-track');
-                if(track.id !== 'niri-track-h-root' && track.querySelectorAll('.niri-window').length === 1) {
-                    track.remove();
-                } else {
-                    win.remove();
-                }
-            }
+            if (win) window.closeNiriWindow(win);
         }
         if(evt.shiftKey && evt.key === 'F') {
             let win = document.activeElement.closest('.niri-window');
@@ -46,14 +39,7 @@
         let closeBtn = evt.target.closest('.mobile-close-btn');
         if(closeBtn) {
             let win = closeBtn.closest('.niri-window');
-            if(win && win.id !== 'root-window' && document.querySelectorAll('.niri-window').length > 1) {
-                let track = win.closest('.niri-horizontal-track');
-                if(track.id !== 'niri-track-h-root' && track.querySelectorAll('.niri-window').length === 1) {
-                    track.remove();
-                } else {
-                    win.remove();
-                }
-            }
+            if (win) window.closeNiriWindow(win);
             return;
         }
         
@@ -120,8 +106,8 @@
                 </div>
             </section>
         </div>
+        {{template "footer" .}}
     </main>
-    {{template "footer" .}}
 </body>
 </html>
 {{ end }}

@@ -1,5 +1,77 @@
 // 2D Niri Hypermedia Logic with paxi.js State Preservation
 
+window.closeNiriWindow = function(win) {
+    if (!win || win.id === 'root-window') return;
+    
+    const track = win.closest('.niri-horizontal-track');
+    let targetToFocus = win.previousElementSibling;
+    let removeTrack = false;
+    
+    if (!targetToFocus || !targetToFocus.classList.contains('niri-window')) {
+        const prevTrack = track.previousElementSibling;
+        if (prevTrack && prevTrack.classList.contains('niri-horizontal-track')) {
+            const windows = prevTrack.querySelectorAll('.niri-window');
+            targetToFocus = windows[windows.length - 1];
+        }
+    }
+    
+    if (track.id !== 'niri-track-h-root' && track.querySelectorAll('.niri-window').length === 1) {
+        removeTrack = true;
+    }
+    
+    if (removeTrack) {
+        track.remove();
+    } else {
+        win.remove();
+    }
+    
+    if (targetToFocus && targetToFocus.classList.contains('niri-window')) {
+        targetToFocus.focus({ preventScroll: true });
+        setTimeout(() => {
+            targetToFocus.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+        }, 50);
+    }
+};
+
+window.centerAndFocusWindow = function() {
+    if (document.body.classList.contains('overview-mode')) return;
+    const windows = document.querySelectorAll('.niri-window');
+    let closest = null;
+    let minDistance = Infinity;
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    windows.forEach(win => {
+        const rect = win.getBoundingClientRect();
+        const winCenterX = rect.left + rect.width / 2;
+        const winCenterY = rect.top + rect.height / 2;
+        const distance = Math.sqrt(Math.pow(centerX - winCenterX, 2) + Math.pow(centerY - winCenterY, 2));
+        
+        if (distance < minDistance) {
+            minDistance = distance;
+            closest = win;
+        }
+    });
+
+    if (closest && document.activeElement !== closest && !closest.contains(document.activeElement)) {
+        closest.focus({ preventScroll: true });
+    }
+};
+
+let scrollTimeout;
+document.addEventListener('scroll', (e) => {
+    if (e.target.id === 'niri-track-v' || (e.target.classList && e.target.classList.contains('niri-horizontal-track'))) {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(window.centerAndFocusWindow, 150);
+    }
+}, { capture: true, passive: true });
+
+document.addEventListener('scrollend', (e) => {
+    if (e.target.id === 'niri-track-v' || (e.target.classList && e.target.classList.contains('niri-horizontal-track'))) {
+        window.centerAndFocusWindow();
+    }
+}, { capture: true });
+
 // Target switching: Main pages spawn new ribbons, sub-pages append to current ribbon
 document.addEventListener('fx:config', (e) => {
   const trigger = e.detail.cfg.trigger;
@@ -103,6 +175,13 @@ document.addEventListener('fx:end', (e) => {
 });
 
 // Initial injection
+function updateViewportVars() {
+  document.documentElement.style.setProperty('--app-width', `${window.innerWidth}px`);
+  document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
+}
+window.addEventListener('resize', updateViewportVars);
+updateViewportVars();
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => injectCloseBtn(document.body));
 } else {
