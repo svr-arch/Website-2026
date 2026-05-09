@@ -22,6 +22,7 @@ document.addEventListener('fx:config', (e) => {
 function injectCloseBtn(container) {
   const wins = container.querySelectorAll('.niri-window');
   wins.forEach(win => {
+    if (win.id === 'root-window') return;
     if (!win.querySelector('.mobile-close-btn')) {
       const closeBtn = document.createElement('button');
       closeBtn.className = 'mobile-close-btn';
@@ -42,7 +43,11 @@ document.addEventListener('fx:after', (e) => {
 
   if (content) {
     // Generate unique ID for paxi to track this window
-    if (!content.id) content.id = 'win-' + Math.random().toString(36).substr(2, 9);
+    if (!content.id || content.id === 'root-window') {
+      content.id = 'win-' + Math.random().toString(36).substr(2, 9);
+    }
+    content.setAttribute('tabindex', '-1');
+    e.detail.cfg.newWinId = content.id;
     
     if (elt && elt.hasAttribute('fx-main-page')) {
       // Wrap main pages in a new horizontal track
@@ -63,12 +68,21 @@ document.addEventListener('fx:after', (e) => {
 
 // Native scroll snapping focus
 document.addEventListener('fx:end', (e) => {
-  const target = e.detail.cfg.target;
-  if (target) {
-    if (target.id === 'niri-track-v') {
-      target.scrollTop = target.scrollHeight;
-    } else {
-      target.scrollLeft = target.scrollWidth;
+  const newWinId = e.detail.cfg.newWinId;
+  if (newWinId) {
+    const win = document.getElementById(newWinId);
+    if (win) {
+      win.focus();
+      win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+    }
+  } else {
+    const target = e.detail.cfg.target;
+    if (target) {
+      if (target.id === 'niri-track-v') {
+        target.scrollTop = target.scrollHeight;
+      } else {
+        target.scrollLeft = target.scrollWidth;
+      }
     }
   }
 });

@@ -44,23 +44,28 @@ body {
 
 body.overview-mode {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    overflow: hidden;
+    overflow: auto;
+    padding: 5rem 0;
 }
 
 body.overview-mode .niri-vertical-track {
-    transform: scale(0.4);
-    transform-origin: center;
+    zoom: 0.4;
+    transform: none; /* override previous transform */
     overflow: visible;
+    height: auto;
 }
 
 body.overview-mode .niri-horizontal-track {
     overflow: visible;
+    min-height: auto;
+    margin-bottom: 2rem;
 }
 
 body.overview-mode .niri-window {
     cursor: pointer;
+    height: 90vh; /* slightly shorter in overview so they look like cards */
 }
 
 body.overview-mode .niri-window > * {

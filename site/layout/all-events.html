@@ -1,10 +1,75 @@
 {{ define "all-events"}}
 {{$PageData := index .DeepDataMerge.Collections .PageURL}}
 {{ template "head" .}}
-<body class="site-body">
+<body class="site-body" 
+    on-keydown="
+        if(evt.shiftKey && evt.key === 'Q') {
+            let win = document.activeElement.closest('.niri-window') || document.querySelector('.niri-window:last-child');
+            if(win && win.id !== 'root-window' && document.querySelectorAll('.niri-window').length > 1) {
+                let track = win.closest('.niri-horizontal-track');
+                if(track.id !== 'niri-track-h-root' && track.querySelectorAll('.niri-window').length === 1) {
+                    track.remove();
+                } else {
+                    win.remove();
+                }
+            }
+        }
+        if(evt.shiftKey && evt.key === 'F') {
+            let win = document.activeElement.closest('.niri-window');
+            if(win) {
+                win.classList.toggle('w-full');
+                win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+            }
+        }
+        if(evt.key === 'd' || evt.key === 'D') {
+            document.body.classList.toggle('overview-mode');
+            if(!document.body.classList.contains('overview-mode')) {
+                let win = document.activeElement.closest('.niri-window');
+                if(win) win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+            }
+        }
+        if(evt.key === '/') {
+            let m = document.getElementById('help-modal');
+            if(m) m.open ? m.close() : m.showModal();
+            evt.preventDefault();
+        }
+    "
+    on-click="
+        let fab = evt.target.closest('.fab-overview');
+        if(fab) {
+            document.body.classList.toggle('overview-mode');
+            return;
+        }
+        
+        let closeBtn = evt.target.closest('.mobile-close-btn');
+        if(closeBtn) {
+            let win = closeBtn.closest('.niri-window');
+            if(win && win.id !== 'root-window' && document.querySelectorAll('.niri-window').length > 1) {
+                let track = win.closest('.niri-horizontal-track');
+                if(track.id !== 'niri-track-h-root' && track.querySelectorAll('.niri-window').length === 1) {
+                    track.remove();
+                } else {
+                    win.remove();
+                }
+            }
+            return;
+        }
+        
+        let win = evt.target.closest('.niri-window');
+        if(win) {
+            win.focus();
+            if(document.body.classList.contains('overview-mode')) {
+                document.body.classList.remove('overview-mode');
+                win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+                evt.preventDefault();
+                evt.stopPropagation();
+            }
+        }
+    "
+>
     <main class="niri-vertical-track" id="niri-track-v">
         <div class="niri-horizontal-track" id="niri-track-h-root">
-            <section class="niri-window" role="main" tabindex="-1">
+            <section class="niri-window" id="root-window" role="main" tabindex="-1">
                 <div class="container site-main">
                     <article class="content">
                         <section class="events-grid">
