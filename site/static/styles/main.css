@@ -42,30 +42,34 @@ body {
     line-height: 1.7;
 }
 
+:root {
+    --track-h: 100vh;
+}
+
 body.overview-mode {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    --track-h: 1000px;
+    display: block;
     overflow: auto;
     padding: 5rem 0;
 }
 
 body.overview-mode .niri-vertical-track {
     zoom: 0.4;
-    transform: none; /* override previous transform */
+    transform: none;
     overflow: visible;
     height: auto;
 }
 
 body.overview-mode .niri-horizontal-track {
     overflow: visible;
-    min-height: auto;
+    min-height: var(--track-h);
+    height: var(--track-h);
     margin-bottom: 2rem;
 }
 
 body.overview-mode .niri-window {
     cursor: pointer;
-    height: 90vh; /* slightly shorter in overview so they look like cards */
+    height: calc(var(--track-h) - 3rem);
 }
 
 body.overview-mode .niri-window > * {
@@ -91,7 +95,7 @@ body.overview-mode .site-footer {
 .niri-horizontal-track {
     display: flex;
     flex-direction: row;
-    min-height: 100vh;
+    min-height: var(--track-h);
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
@@ -106,7 +110,7 @@ body.overview-mode .site-footer {
 
 .niri-window {
     flex: 0 0 calc(50% - 2.25rem);
-    height: calc(100vh - 3rem);
+    height: calc(var(--track-h) - 3rem);
     overflow-y: auto;
     scroll-snap-align: center;
     border: 1px solid rgba(0, 170, 254, 0.3);
@@ -130,12 +134,16 @@ body.overview-mode .site-footer {
 }
 
 .niri-window.w-full {
-    flex-basis: calc(100% - 3rem);
+    flex-basis: 100%;
+}
+
+#root-window {
+    flex-basis: 100%;
 }
 
 @media (max-width: 768px) {
     .niri-window {
-        flex-basis: calc(100% - 3rem);
+        flex-basis: 100%;
     }
 }
 

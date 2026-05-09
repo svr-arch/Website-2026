@@ -7,6 +7,16 @@ document.addEventListener('fx:config', (e) => {
   const elt = trigger.target.closest('[fx-action]');
   if (!elt) return;
 
+  const url = e.detail.cfg.action;
+  const existing = document.querySelector(`.niri-window[data-url="${url}"]`);
+  if (existing) {
+    e.preventDefault(); // Abort fixi request
+    document.body.classList.remove('overview-mode');
+    existing.focus();
+    existing.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+    return;
+  }
+
   if (elt.hasAttribute('fx-main-page')) {
     e.detail.cfg.target = document.getElementById('niri-track-v');
     e.detail.cfg.swap = 'beforeend';
@@ -42,6 +52,7 @@ document.addEventListener('fx:after', (e) => {
   const content = doc.querySelector('.niri-window');
 
   if (content) {
+    content.setAttribute('data-url', e.detail.cfg.action);
     // Generate unique ID for paxi to track this window
     if (!content.id || content.id === 'root-window') {
       content.id = 'win-' + Math.random().toString(36).substr(2, 9);
@@ -73,7 +84,9 @@ document.addEventListener('fx:end', (e) => {
     const win = document.getElementById(newWinId);
     if (win) {
       win.focus();
-      win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+      setTimeout(() => {
+        win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+      }, 50);
     }
   } else {
     const target = e.detail.cfg.target;
