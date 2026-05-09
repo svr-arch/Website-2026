@@ -13,7 +13,9 @@ document.addEventListener('fx:config', (e) => {
     e.preventDefault(); // Abort fixi request
     document.body.classList.remove('overview-mode');
     existing.focus();
-    existing.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+    setTimeout(() => {
+      existing.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+    }, 50);
     return;
   }
 
