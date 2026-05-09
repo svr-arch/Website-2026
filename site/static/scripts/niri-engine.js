@@ -12,7 +12,7 @@ document.addEventListener('fx:config', (e) => {
   if (existing) {
     e.preventDefault(); // Abort fixi request
     document.body.classList.remove('overview-mode');
-    existing.focus();
+    existing.focus({ preventScroll: true });
     setTimeout(() => {
       existing.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
     }, 50);
@@ -85,7 +85,7 @@ document.addEventListener('fx:end', (e) => {
   if (newWinId) {
     const win = document.getElementById(newWinId);
     if (win) {
-      win.focus();
+      win.focus({ preventScroll: true });
       setTimeout(() => {
         win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
       }, 50);

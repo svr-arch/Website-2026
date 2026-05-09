@@ -59,11 +59,14 @@
         }
         
         let win = evt.target.closest('.niri-window');
-        if(win) {
-            win.focus();
+        let interactive = evt.target.closest('a, button, input');
+        if(win && !interactive) {
+            win.focus({ preventScroll: true });
             if(document.body.classList.contains('overview-mode')) {
                 document.body.classList.remove('overview-mode');
-                win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+                setTimeout(() => {
+                    win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+                }, 50);
                 evt.preventDefault();
                 evt.stopPropagation();
             }
