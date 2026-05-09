@@ -17,7 +17,10 @@
         }
         if(evt.shiftKey && evt.key === 'F') {
             let win = document.activeElement.closest('.niri-window');
-            if(win) win.classList.toggle('w-full');
+            if(win) {
+                win.classList.toggle('w-full');
+                win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+            }
         }
         if(evt.key === 'd' || evt.key === 'D') {
             document.body.classList.toggle('overview-mode');
