@@ -35,6 +35,8 @@ body {
     font-family: var(--font-family-sans);
     color: #a3c4ec;
     background-color: #000c23;
+    background-image: radial-gradient(circle at 15% 50%, rgba(0, 170, 254, 0.15), transparent 40%),
+                      radial-gradient(circle at 85% 30%, rgba(139, 184, 214, 0.1), transparent 40%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.7;
@@ -102,14 +104,16 @@ body.overview-mode .site-footer {
     height: calc(100vh - 3rem);
     overflow-y: auto;
     scroll-snap-align: center;
-    border: 1px solid rgba(0, 170, 254, 0.2);
+    border: 1px solid rgba(0, 170, 254, 0.3);
     border-radius: 16px;
     box-sizing: border-box;
     transition:
         flex-basis 0.3s ease,
         box-shadow 0.3s ease,
         border-color 0.3s ease;
-    background: #000c23;
+    background: rgba(0, 12, 35, 0.6);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     padding: 2rem;
 }
 
@@ -135,8 +139,10 @@ body.overview-mode .site-footer {
     top: 10px;
     right: 10px;
     float: right;
-    background: rgba(0, 170, 254, 0.1);
-    border: 1px solid #00aafe;
+    background: rgba(0, 170, 254, 0.15);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(0, 170, 254, 0.4);
     color: #fff;
     width: 36px;
     height: 36px;
@@ -156,9 +162,11 @@ body.overview-mode .site-footer {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: #00aafe;
+    background: rgba(0, 170, 254, 0.6);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     color: #000c23;
-    border: none;
+    border: 1px solid rgba(0, 170, 254, 0.8);
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     cursor: pointer;
     z-index: 2000;
@@ -180,7 +188,9 @@ body.overview-mode .site-footer {
 /* Ensure help modal looks good */
 #help-modal {
     border: 1px solid rgba(0, 170, 254, 0.4);
-    background: #000c23;
+    background: rgba(0, 12, 35, 0.6);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     color: #00aafe;
     border-radius: 12px;
     padding: 2rem;
