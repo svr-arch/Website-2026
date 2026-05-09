@@ -92,8 +92,14 @@ document.addEventListener('fx:config', (e) => {
   }
 
   if (elt.hasAttribute('fx-main-page')) {
-    e.detail.cfg.target = document.getElementById('niri-track-v');
-    e.detail.cfg.swap = 'beforeend';
+    const footer = document.querySelector('.site-footer');
+    if (footer) {
+      e.detail.cfg.target = footer;
+      e.detail.cfg.swap = 'beforebegin';
+    } else {
+      e.detail.cfg.target = document.getElementById('niri-track-v');
+      e.detail.cfg.swap = 'beforeend';
+    }
   } else {
     const track = elt.closest('.niri-horizontal-track');
     if (track) {
