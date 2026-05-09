@@ -192,6 +192,155 @@ body.overview-mode .site-footer {
     .niri-window {
         flex-basis: 100%;
     }
+
+    body.overview-mode {
+        padding: 1rem 0;
+        align-items: flex-start;
+    }
+
+    body.overview-mode .niri-vertical-track {
+        zoom: 1; /* Reset desktop zoom */
+        gap: 1rem;
+        padding: 1rem;
+        padding-bottom: 4rem;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        box-sizing: border-box;
+        align-items: start;
+    }
+
+    /* Track with MULTIPLE windows (Tab Group) */
+    body.overview-mode .niri-horizontal-track:has(> .niri-window:nth-of-type(2)) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        margin-bottom: 0;
+        padding: 12px;
+        box-sizing: border-box;
+        background: rgba(190, 200, 255, 0.15); /* Tab group background */
+        border-radius: 24px;
+        border: 1px solid rgba(190, 200, 255, 0.3);
+        align-content: start;
+        overflow: visible;
+        grid-column: 1 / -1; /* Span the entire row! */
+    }
+
+    /* Heading for the Tab Group */
+    body.overview-mode .niri-horizontal-track[data-group-name]:has(> .niri-window:nth-of-type(2))::before {
+        content: attr(data-group-name);
+        grid-column: 1 / -1; /* Span across the internal grid */
+        font-family: var(--font-family-sans);
+        font-size: 1rem;
+        font-weight: 600;
+        color: #a3c4ec;
+        padding: 4px 8px 8px 8px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Track with ONLY ONE window */
+    body.overview-mode .niri-horizontal-track:not(:has(> .niri-window:nth-of-type(2))) {
+        display: block;
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        margin-bottom: 0;
+        padding: 0;
+        background: transparent;
+        border-radius: 0;
+        border: none;
+        overflow: visible;
+    }
+
+    body.overview-mode .niri-horizontal-track:first-child {
+        grid-column: 1 / -1; /* Main page spans both columns */
+    }
+
+    body.overview-mode .niri-window {
+        width: 100%;
+        height: 240px; 
+        min-height: 240px;
+        margin: 0;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 4px rgba(0, 170, 254, 0.2);
+        background: #00122e; 
+        border: 1px solid rgba(0, 170, 254, 0.4);
+        position: relative;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        overflow: hidden;
+    }
+
+    /* Window inside Tab Group is much smaller */
+    body.overview-mode .niri-horizontal-track:has(> .niri-window:nth-of-type(2)) .niri-window {
+        height: 110px;
+        min-height: 110px;
+        border-radius: 12px;
+    }
+
+    body.overview-mode #root-window {
+        height: 240px;
+        min-height: 240px;
+        width: 100%;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 170, 254, 0.4);
+        margin: 0;
+    }
+
+    body.overview-mode .niri-window:hover,
+    body.overview-mode .niri-window:focus-within {
+        transform: translateY(-4px) scale(1.02);
+        z-index: 10;
+        border-color: #00aafe;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 12px rgba(0, 170, 254, 0.4);
+    }
+
+    /* Default content scaling */
+    body.overview-mode .niri-window > *:not(.mobile-close-btn) {
+        transform: scale(0.5);
+        transform-origin: top left;
+        width: 200%;
+        height: 200%;
+    }
+
+    /* Even smaller scaling for windows in a Tab Group */
+    body.overview-mode .niri-horizontal-track:has(> .niri-window:nth-of-type(2)) .niri-window > *:not(.mobile-close-btn) {
+        transform: scale(0.35);
+        width: 285%; 
+        height: 285%;
+    }
+
+    body.overview-mode .niri-window > .mobile-close-btn {
+        position: absolute;
+        transform: none; 
+        top: 8px;
+        right: 8px;
+        width: 32px; 
+        height: 32px;
+        pointer-events: auto; 
+        background: rgba(0, 12, 35, 0.8);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(0, 170, 254, 0.5);
+        color: #fff;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        border-radius: 50%;
+    }
+
+    /* Smaller close button in Tab Groups */
+    body.overview-mode .niri-horizontal-track:has(> .niri-window:nth-of-type(2)) .niri-window > .mobile-close-btn {
+        width: 24px;
+        height: 24px;
+        top: 6px;
+        right: 6px;
+        font-size: 1rem;
+    }
 }
 
 .mobile-close-btn {

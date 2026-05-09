@@ -145,6 +145,9 @@ document.addEventListener('fx:after', (e) => {
       const ribbon = document.createElement('div');
       ribbon.className = 'niri-horizontal-track';
       ribbon.id = 'track-' + Math.random().toString(36).substr(2, 9);
+      if (elt.textContent) {
+        ribbon.setAttribute('data-group-name', elt.textContent.trim());
+      }
       ribbon.appendChild(content);
       injectCloseBtn(ribbon);
       e.detail.cfg.text = ribbon.outerHTML;
