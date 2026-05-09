@@ -75,7 +75,7 @@ body.overview-mode .site-footer {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     scroll-snap-type: y mandatory;
@@ -87,7 +87,7 @@ body.overview-mode .site-footer {
     display: flex;
     flex-direction: row;
     min-height: 100vh;
-    width: 100vw;
+    width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
@@ -100,7 +100,7 @@ body.overview-mode .site-footer {
 }
 
 .niri-window {
-    flex: 0 0 calc(50vw - 2.25rem);
+    flex: 0 0 calc(50% - 2.25rem);
     height: calc(100vh - 3rem);
     overflow-y: auto;
     scroll-snap-align: center;
@@ -125,12 +125,12 @@ body.overview-mode .site-footer {
 }
 
 .niri-window.w-full {
-    flex-basis: calc(100vw - 3rem);
+    flex-basis: calc(100% - 3rem);
 }
 
 @media (max-width: 768px) {
     .niri-window {
-        flex-basis: calc(100vw - 3rem);
+        flex-basis: calc(100% - 3rem);
     }
 }
 
