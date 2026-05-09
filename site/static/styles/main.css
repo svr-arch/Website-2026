@@ -98,6 +98,11 @@ body.overview-mode .site-footer {
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
     transition: transform 0.5s;
+    scrollbar-width: none;
+}
+
+.niri-vertical-track::-webkit-scrollbar {
+    display: none;
 }
 
 .niri-horizontal-track {
@@ -115,6 +120,11 @@ body.overview-mode .site-footer {
     gap: 1.5rem;
     padding: 1.5rem;
     box-sizing: border-box;
+    scrollbar-width: none;
+}
+
+.niri-horizontal-track::-webkit-scrollbar {
+    display: none;
 }
 
 .niri-window {
@@ -134,6 +144,23 @@ body.overview-mode .site-footer {
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     padding: 2rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 170, 254, 0.3) transparent;
+}
+
+.niri-window::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.niri-window::-webkit-scrollbar-track {
+    background: transparent;
+}
+.niri-window::-webkit-scrollbar-thumb {
+    background: rgba(0, 170, 254, 0.3);
+    border-radius: 10px;
+}
+.niri-window::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 170, 254, 0.6);
 }
 
 .niri-window:focus,
