@@ -1,5 +1,5 @@
 ---
-title: "PESU ECC"
+title: ""
 layout: page
 ---
 

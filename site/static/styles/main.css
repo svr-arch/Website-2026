@@ -997,7 +997,7 @@ h3 > code,
 h4 > code,
 a > code {
     font-family: JuliaMono, monospace;
-    color: var(--color-heading);
+    color: #00aafe;
     background-color: var(--inline-code-bg);
     /* Allow inline code to wrap on small viewports */
     white-space: pre-wrap;
@@ -1139,7 +1139,7 @@ a > code {
     --color-background-low: #ffffff50;
     --color-background-contrast: #0969da;
 
-    --inline-code-bg: #f6f8fa;
+    --inline-code-bg: rgba(0, 170, 254, 0.1);
     --selection-bg: #0969da1a;
 
     --color-primary: #c7dbe6;
