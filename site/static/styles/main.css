@@ -30,10 +30,10 @@ html {
 body {
     margin: 0;
     overflow: hidden;
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 1.2vw + 0.5rem, 1.20rem); /* Responsive base text for all elements */
     font-weight: 400;
     font-family: var(--font-family-sans);
-    color: #a3c4ec;
+    color: #e2e8f0; /* Improved contrast */
     background-color: #000c23;
     background-image: radial-gradient(circle at 15% 50%, rgba(0, 170, 254, 0.15), transparent 40%),
                       radial-gradient(circle at 85% 30%, rgba(139, 184, 214, 0.1), transparent 40%);
@@ -188,9 +188,16 @@ body.overview-mode .site-footer {
     height: var(--app-height);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .niri-window {
         flex-basis: 100%;
+        padding: 0.75rem 0.75rem 0.25rem 0.75rem; /* Revert to smaller in-window padding */
+        height: calc(var(--app-height) - 1rem); /* 0.5rem top + 0.5rem bottom padding from track */
+    }
+
+    .niri-horizontal-track {
+        padding: 0.5rem; /* Increased padding between window and screen */
+        gap: 0.5rem;
     }
 
     body.overview-mode {
@@ -285,9 +292,57 @@ body.overview-mode .site-footer {
         height: 240px;
         min-height: 240px;
         width: 100%;
+        max-width: 100%; /* Prevent grid blowout */
         border-radius: 16px;
         border: 1px solid rgba(0, 170, 254, 0.4);
         margin: 0;
+        padding: 0;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    body.overview-mode #root-window .site-main,
+    body.overview-mode #root-window .content,
+    body.overview-mode #root-window .body {
+        display: contents;
+    }
+
+    body.overview-mode .niri-root-window {
+        max-width: 100%; /* Prevent flex child from forcing parent growth */
+        height: auto;
+        padding: 1rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    body.overview-mode .root-logo {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 0.75rem;
+        object-fit: contain;
+    }
+
+    body.overview-mode .root-title {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    body.overview-mode .root-tagline {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    body.overview-mode .root-nav {
+        gap: 1rem;
+    }
+
+    body.overview-mode .root-nav a {
+        font-size: 0.8rem;
     }
 
     body.overview-mode .niri-window:hover,
@@ -427,19 +482,20 @@ body.overview-mode .site-footer {
 /* Ensure paragraphs have comfortable spacing */
 p {
     margin: 0 0 1.15rem 0;
+}
+p, li, blockquote, td, th {
     font-family: var(--font-family-sans);
-    font-size: 1.20rem;
-    color : #00aafe;
+    color : #cbd5e1; /* Lighter text for reading */
 }
 
 /* Slightly reduce heading line-height so headings remain compact */
 h1{
-    font-size: 4.00rem;
+    font-size: clamp(2.5rem, 8vw, 4.0rem);
     color : #ffffff;
     font-family: "PT Mono";
 }
 h2{
-    font-size: 2.0rem;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
     color : #ffffff;
     font-family: "PT Mono";
 }
@@ -483,7 +539,7 @@ code {
     overflow-wrap: anywhere;
     word-wrap: break-word;
     word-break: break-word;
-    hyphens: auto;
+    hyphens: none; /* Prevent splitting normal words with hyphens */
     white-space: normal;
 }
 
@@ -629,8 +685,8 @@ h6 {
 
 /* Improved heading scale for docs (reduced for tighter layout) */
 h1 {
-    font-size: 5rem;
-    margin: 1.25rem 0 0.6rem;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    margin: 2.5rem 0 2rem; /* Increased top and bottom margin for better spacing */
 }
 
 .page-date {
@@ -651,7 +707,7 @@ h1 {
 
 h2 {
     font-size: clamp(1.5rem, 4vw, 2rem);
-    margin: 2.5rem 0 1rem;
+    margin: 2.5rem 0 1.5rem; /* Increased bottom margin */
 }
 
 h3 {
