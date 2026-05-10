@@ -7,25 +7,25 @@ layout: page
   <img src="/static/images/anna.png" alt="ACM PESU ECC" class="root-logo">
   <h1 class="root-title">ACM PESU-ECC</h1>
   <p class="root-tagline">Niri-inspired horizontal tiling interface.</p>
+
+  <nav class="root-nav glass-pill">
+    <a href="/about.html" class="m-link" fx-action="/about.html" fx-main-page fx-target="#niri-track-v" fx-swap="beforeend">About</a>
+    <div class="nav-separator"></div>
+    <a href="/members/index.html" class="m-link" fx-action="/members/index.html" fx-main-page fx-target="#niri-track-v" fx-swap="beforeend">Members</a>
+    <div class="nav-separator"></div>
+    <a href="/blogs/index.html" class="m-link" fx-action="/blogs/index.html" fx-main-page fx-target="#niri-track-v" fx-swap="beforeend">Blogs</a>
+    <div class="nav-separator"></div>
+    <a href="/events/index.html" class="m-link" fx-action="/events/index.html" fx-main-page fx-target="#niri-track-v" fx-swap="beforeend">Events</a>
+    <div class="nav-separator"></div>
+    <a href="/contact.html" class="m-link" fx-action="/contact.html" fx-main-page fx-target="#niri-track-v" fx-swap="beforeend">Contact</a>
+  </nav>
 </div>
 
-<nav class="root-nav glass-pill">
-  <a href="/about.html" class="m-link" fx-action="/about.html" fx-main-page fx-target="#niri-track-v" fx-swap="beforeend">About</a>
-  <div class="nav-separator"></div>
-  <a href="/members/index.html" class="m-link" fx-action="/members/index.html" fx-main-page fx-target="#niri-track-v" fx-swap="beforeend">Members</a>
-  <div class="nav-separator"></div>
-  <a href="/blogs/index.html" class="m-link" fx-action="/blogs/index.html" fx-main-page fx-target="#niri-track-v" fx-swap="beforeend">Blogs</a>
-  <div class="nav-separator"></div>
-  <a href="/events/index.html" class="m-link" fx-action="/events/index.html" fx-main-page fx-target="#niri-track-v" fx-swap="beforeend">Events</a>
-  <div class="nav-separator"></div>
-  <a href="/contact.html" class="m-link" fx-action="/contact.html" fx-main-page fx-target="#niri-track-v" fx-swap="beforeend">Contact</a>
-</nav>
-
 <style>
-/* Dot pattern for the background of root-window */
+/* Base root window styling */
 #root-window {
   background-color: #000c23;
-  background-image: radial-gradient(rgba(0, 170, 254, 0.2) 1.5px, transparent 1.5px);
+  background-image: radial-gradient(rgba(0, 170, 254, 0.1) 1px, transparent 1px);
   background-size: 24px 24px;
   position: relative;
   display: flex;
@@ -34,13 +34,16 @@ layout: page
   justify-content: center;
 }
 
-/* Cursor trail effect */
+/* Glowing Dot trail effect */
 #root-window::before {
   content: "";
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none;
-  background: radial-gradient(circle 200px at var(--cursor-x, -200px) var(--cursor-y, -200px), rgba(0, 170, 254, 0.2), transparent);
+  background-image: radial-gradient(rgba(0, 170, 254, 0.8) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(circle 150px at var(--cursor-x, -150px) var(--cursor-y, -150px), rgba(0, 0, 0, 1), transparent);
+  mask-image: radial-gradient(circle 150px at var(--cursor-x, -150px) var(--cursor-y, -150px), rgba(0, 0, 0, 1), transparent);
   z-index: 0;
   transition: opacity 0.3s;
 }
@@ -60,7 +63,6 @@ layout: page
   border: 1px solid rgba(0, 170, 254, 0.3);
   border-radius: 32px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  margin-bottom: 3rem;
   width: min(90%, 600px);
 }
 
@@ -81,52 +83,66 @@ layout: page
 .root-tagline {
   font-size: 1.2rem;
   color: #8bb8d6;
-  margin-bottom: 0;
+  margin-bottom: 2rem;
 }
 
 .root-nav.glass-pill {
   position: relative;
   z-index: 1;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-wrap: nowrap;
+  align-items: stretch;
   justify-content: center;
-  background: rgba(0, 12, 35, 0.6);
+  background: rgba(0, 12, 35, 0.4);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(0, 170, 254, 0.3);
+  border: 1px solid rgba(0, 170, 254, 0.2);
   border-radius: 50px;
-  padding: 0.5rem 1rem;
+  padding: 0;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  gap: 0.5rem;
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .nav-separator {
   width: 1px;
-  height: 24px;
   background: rgba(0, 170, 254, 0.3);
+  align-self: stretch;
+  margin: 0;
 }
 
 .root-nav .m-link {
   color: #a3c4ec;
   text-decoration: none;
   font-weight: 600;
-  padding: 0.75rem 1.25rem;
-  border-radius: 40px;
+  padding: 1.25rem 2rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  background: transparent;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
+}
+
+.root-nav .m-link:first-of-type {
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+.root-nav .m-link:last-of-type {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
 
 .root-nav .m-link:hover, .root-nav .m-link:focus {
   color: #ffffff;
   background: rgba(0, 170, 254, 0.25);
-  transform: scale(1.08);
-  box-shadow: 0 0 15px rgba(0, 170, 254, 0.4);
   outline: none;
 }
 
-/* Add a bit of noise to the glass pill on hover/focus to match iOS */
+/* Add noise to the glass pill on hover/focus to match iOS */
 .root-nav .m-link::after {
   content: "";
   position: absolute;
@@ -135,28 +151,34 @@ layout: page
   opacity: 0;
   mix-blend-mode: overlay;
   transition: opacity 0.3s;
-  border-radius: 40px;
   pointer-events: none;
 }
 
 .root-nav .m-link:hover::after, .root-nav .m-link:focus::after {
-  opacity: 0.2;
+  opacity: 0.5;
 }
 
 @media (max-width: 768px) {
   .root-nav.glass-pill {
     flex-direction: column;
     border-radius: 24px;
-    padding: 1rem;
     width: min(90%, 300px);
   }
   .nav-separator {
-    width: 80%;
+    width: 100%;
     height: 1px;
+    margin: 0;
   }
   .root-nav .m-link {
     width: 100%;
     text-align: center;
+    border-radius: 0;
+  }
+  .root-nav .m-link:first-of-type {
+    border-radius: 24px 24px 0 0;
+  }
+  .root-nav .m-link:last-of-type {
+    border-radius: 0 0 24px 24px;
   }
 }
 </style>
@@ -166,12 +188,24 @@ layout: page
   (function() {
     const rootWindow = document.getElementById('root-window');
     if (rootWindow && !rootWindow.dataset.cursorBound) {
+      let currentX = -200, currentY = -200;
+      let targetX = -200, targetY = -200;
+      
+      function animate() {
+        currentX += (targetX - currentX) * 0.15;
+        currentY += (targetY - currentY) * 0.15;
+        rootWindow.style.setProperty('--cursor-x', `${currentX}px`);
+        rootWindow.style.setProperty('--cursor-y', `${currentY}px`);
+        if (rootWindow.isConnected) {
+          requestAnimationFrame(animate);
+        }
+      }
+      requestAnimationFrame(animate);
+
       rootWindow.addEventListener('mousemove', (e) => {
         const rect = rootWindow.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        rootWindow.style.setProperty('--cursor-x', `${x}px`);
-        rootWindow.style.setProperty('--cursor-y', `${y}px`);
+        targetX = e.clientX - rect.left;
+        targetY = e.clientY - rect.top;
       });
       rootWindow.dataset.cursorBound = 'true';
     }
