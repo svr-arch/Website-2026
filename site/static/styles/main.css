@@ -293,7 +293,7 @@ body.overview-mode .site-footer {
     body.overview-mode #root-window {
         aspect-ratio: 4 / 3;
         height: auto;
-        min-height: 240px;
+        min-height: 300px;
         width: 100%;
         max-width: 100%; /* Prevent grid blowout */
         border-radius: 16px;
