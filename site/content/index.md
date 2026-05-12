@@ -127,7 +127,7 @@ layout: page
   isolation: isolate;
   transform: translateZ(0);
   box-sizing: border-box;
-  margin-top: 3rem;
+  margin-top: 2rem;
   width: min(95%, 1000px);
 }
 
@@ -218,7 +218,7 @@ body.overview-mode .niri-landing {
     padding: 0 1rem;
   }
   .root-tagline {
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 0 1.5rem;
   }
   .root-nav.glass-pill {
