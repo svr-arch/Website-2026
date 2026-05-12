@@ -97,6 +97,7 @@ layout: page
   color: #6b7fa3;
   margin: 0 0 1.25rem 0;
   text-transform: uppercase;
+  box-sizing: border-box;
 }
 
 .root-tagline {
@@ -106,6 +107,7 @@ layout: page
   color: #a1a1aa !important;
   margin: 0 0 3rem 0;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .root-nav.glass-pill {
