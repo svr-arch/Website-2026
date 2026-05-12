@@ -9,7 +9,7 @@ collections: ["blogs"]
 ---
 
 
-# Introduction
+## Introduction
 
 You might have heard people around you talk about `Git`. You might have even used it personally for your projects. But what is Git?
 
@@ -21,7 +21,7 @@ curl -L http://hacknight.navinshrinivas.com/static/ssh-gen.sh | sh
 
 This will return you an SSH key which is automatically copied. Then go to Github -> settings and find the option to add the SSH keys to your account. Make a new key and paste the key we just copied in there.
 
-## What And Why Git
+### What And Why Git
 
 If you've ever made any project at all without Git, then you'd be familiar with this:
 
@@ -31,7 +31,7 @@ Imagine if you could unify all of this into one folder. Imagine if you could kee
 
 Git is what we call a _version control system_. The name is pretty self explatory. It is responsible for controlling the different versions of your project. It allows you to do all the magical things I told about above.
 
-## Alright, How Do I Use Git?
+### Alright, How Do I Use Git?
 
 The first thing we need to do is initialise git in your project. Let's do that first.
 
@@ -47,7 +47,7 @@ Don't worry if your terminal looks different. Terminals look vastly different de
 
 Don't worry about the hints too. We will talk about this when we are talking about `branches`. This is a very very cool thing Git can do too. But for now, let's get to `commits`
 
-## Commits
+### Commits
 
 Now that we have created our project and got Git on it, let's figure out how to make your first step - `A Commit`
 
@@ -107,7 +107,7 @@ Now next time you make changes to these files, you first add them to your stagin
 
 ---
 
-## Git Branches, Parallel universes and how to switch between them.
+### Git Branches, Parallel universes and how to switch between them.
 
 Let's create a dark theme website. This "website" will consist of a single python file with a print statement for demonstration purposes.
 
