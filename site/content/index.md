@@ -181,6 +181,9 @@ body.overview-mode .niri-landing {
 }
 
 @media (max-width: 768px) {
+  .niri-landing {
+    margin-top: 5vh;
+  }
   .root-logo {
     width: min(80vw, 300px);
   }
