@@ -184,6 +184,9 @@ body.overview-mode .niri-landing {
   .niri-landing {
     margin-top: 5vh;
   }
+  body.overview-mode .niri-landing {
+    margin-top: 0;
+  }
   .root-logo {
     width: min(80vw, 300px);
   }
