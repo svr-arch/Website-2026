@@ -5,9 +5,9 @@ layout: page
 
 <div class="niri-landing">
   <div class="niri-root-content">
-    <img src="/static/images/anna.png" alt="ACM PESU ECC" class="root-logo">
-    <h1 class="root-title">ACM PESU-ECC</h1>
-    <p class="root-tagline">Niri-inspired horizontal tiling interface.</p>
+    <img src="/static/images/acmpesuecc2.png" alt="ACM PESU ECC Logo" class="root-logo" draggable="false">
+    <p class="root-eyebrow">PES University EC Campus ACM Student Chapter</p>
+    <p class="root-tagline">A student led tech community at PES University centered around technology, creativity and collaboration</p>
   </div>
 
   <nav class="root-nav glass-pill">
@@ -77,27 +77,34 @@ layout: page
 }
 
 .root-logo {
-  width: 120px;
-  height: 120px;
+  width: 470px;
+  height: auto;
   margin-bottom: 1.5rem;
-  border-radius: 24px;
-  box-shadow: 0 0 24px rgba(0, 170, 254, 0.4);
-  object-fit: cover;
-  transition: all 0.3s ease;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 20px rgba(255,255,255,0.05));
+  transition: all 0.25s ease;
 }
 
-.root-title {
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  margin-bottom: 0.5rem;
-  color: #ffffff;
-  text-shadow: 0 0 20px rgba(0, 170, 254, 0.3);
-  width: 100%;
+.root-logo:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.root-eyebrow {
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: #6b7fa3;
+  margin: 0 0 1.25rem 0;
+  text-transform: uppercase;
 }
 
 .root-tagline {
-  font-size: 1.2rem;
-  color: #8bb8d6;
-  margin-bottom: 0;
+  font-size: clamp(1rem, 3vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #a1a1aa !important;
+  margin: 0 0 3rem 0;
   width: 100%;
 }
 
@@ -124,7 +131,7 @@ layout: page
 
 .nav-separator {
   width: 1px;
-  background: rgba(0, 170, 254, 0.3);
+  background: rgba(0, 170, 254, 0.12);
   align-self: stretch;
   margin: 0;
 }
