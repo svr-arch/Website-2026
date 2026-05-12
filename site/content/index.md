@@ -188,6 +188,14 @@ body.overview-mode .niri-landing {
   transform: translate(-50%, -50%) scale(0.35);
 }
 
+body.overview-mode .root-logo {
+  width: 120px;
+  min-width: 120px;
+  height: auto;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
 body.overview-mode .niri-landing {
   padding-top: 2rem;
   justify-content: flex-start;
@@ -195,12 +203,12 @@ body.overview-mode .niri-landing {
 
 @media (max-width: 768px) {
   .niri-landing {
-    margin-top: 5vh;
+    margin-top: 8vh;
   }
   body.overview-mode .niri-landing {
     width: 100vw;
-    height: 100vh;
-    transform: translate(-50%, -50%) scale(0.4);
+    height: 30vh;
+    transform: translate(-50%, -50%) scale(0.65);
   }
   .root-logo {
     width: min(80vw, 300px);
