@@ -53,6 +53,8 @@ body.overview-mode {
     align-items: flex-start;
     padding: 5rem 0;
     overflow: auto;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 body.overview-mode .niri-vertical-track {
