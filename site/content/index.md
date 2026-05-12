@@ -117,8 +117,8 @@ layout: page
   background: rgba(0, 12, 35, 0.4);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(0, 170, 254, 0.2);
-  border-radius: 100px;
+  border: 1px solid rgba(0, 170, 254, 0.08);
+  border-radius: 16px;
   padding: 0;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   overflow: hidden;
@@ -181,10 +181,22 @@ body.overview-mode .niri-landing {
 }
 
 @media (max-width: 768px) {
+  .root-logo {
+    width: min(80vw, 300px);
+  }
+  .root-eyebrow {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+  }
+  .root-tagline {
+    font-size: 1rem;
+    padding: 0 1.5rem;
+  }
   .root-nav.glass-pill {
     flex-direction: column;
-    border-radius: 24px;
-    width: min(90%, 300px);
+    border-radius: 16px;
+    width: min(85%, 260px);
+    margin-top: 2rem;
   }
   .nav-separator {
     width: 100%;
@@ -193,7 +205,8 @@ body.overview-mode .niri-landing {
   .root-nav .m-link {
     width: 100%;
     text-align: center;
-    padding: 1rem;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
   }
 }
 </style>
