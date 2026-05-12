@@ -188,6 +188,11 @@ body.overview-mode .niri-landing {
   transform: translate(-50%, -50%) scale(0.35);
 }
 
+body.overview-mode .niri-landing {
+  padding-top: 2rem;
+  justify-content: flex-start;
+}
+
 @media (max-width: 768px) {
   .niri-landing {
     margin-top: 5vh;
@@ -195,7 +200,7 @@ body.overview-mode .niri-landing {
   body.overview-mode .niri-landing {
     width: 100vw;
     height: 100vh;
-    transform: translate(-50%, -50%) scale(0.65);
+    transform: translate(-50%, -50%) scale(0.4);
   }
   .root-logo {
     width: min(80vw, 300px);
