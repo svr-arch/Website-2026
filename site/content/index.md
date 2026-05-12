@@ -176,8 +176,14 @@ layout: page
 
 /* Scaling for overview mode via CSS transformations to ensure layout integrity */
 body.overview-mode .niri-landing {
-  transform: scale(0.6);
-  transform-origin: center center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  margin: 0 !important;
+  transform: translate(-50%, -50%) scale(0.35);
 }
 
 @media (max-width: 768px) {
@@ -185,7 +191,9 @@ body.overview-mode .niri-landing {
     margin-top: 5vh;
   }
   body.overview-mode .niri-landing {
-    margin-top: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-50%, -50%) scale(0.65);
   }
   .root-logo {
     width: min(80vw, 300px);
