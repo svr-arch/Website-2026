@@ -1,7 +1,7 @@
 {
   "navbar": [
     { "Announcements": "announcement.html" },
-    { "Manifesto": "manifesto.html" },
+    { "About": "about.html" },
     { "Members": "members.html" },
     { "Events": "collections/events.html" },
     { "Blogs": "collections/blogs.html" },
@@ -9,7 +9,7 @@
   ],
   "baseURL": "https://acmpesuecc.github.io/Website-2026/",
   "siteTitle": "PES University EC Campus ACM Student Chapter",
-  "siteScripts": null,
+  "siteScripts": ["niri-engine.js"],
   "author": "PES University EC Campus ACM Student Chapter",
   "copyright": "This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International.",
   "customFields": {

@@ -9,7 +9,7 @@ collections: ["blogs"]
 ---
 
 
-# A brief history of cloud computing and virtualisation
+## A brief history of cloud computing and virtualisation
 
 The cloud has often been simply described as “someone else’s computer”.
 Back in the old days of yore, people would have to setup and manage their own hardware infrastructure and servers.
@@ -24,7 +24,7 @@ It worked out to be cheaper too, since people could pay only for the resources t
 This gave rise to various virtualisation technologies like docker and in the 2010s
 the adoption of cloud native tech was on the rise.
 
-# What is WebAssembly?
+## What is WebAssembly?
 
 - WASM or WebAssembly is is a binary instruction format for a stack-based virtual machine.
 - Wasm is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.
@@ -32,7 +32,7 @@ the adoption of cloud native tech was on the rise.
 
 ![](https://raw.githubusercontent.com/sid-008/v2blog/main/static/wasm2.png)
 
-# Why WASM?
+## Why WASM?
 
 - The binary format for WebAssembly can be natively decoded much faster than JavaScript can be parsed (experiments show more than 20× faster). On mobile, large compiled codes can easily take 20–40 seconds just to parse, so native decoding provides a better user experience.
 - But asm.js already exists?(asm.js is a subset of js designed to allow languages such as C to be run as web apps)
@@ -42,7 +42,7 @@ the adoption of cloud native tech was on the rise.
 
 ![](https://raw.githubusercontent.com/sid-008/v2blog/main/static/wasm3.png)
 
-# Where is WASM?
+## Where is WASM?
 
 - [Made with WebAssembly](https://madewithwebassembly.com/)
 - [WebAssembly cut Figma's load time by 3x](https://www.figma.com/blog/webassembly-cut-figmas-load-time-by-3x/)
@@ -51,14 +51,14 @@ the adoption of cloud native tech was on the rise.
 - [Fermyon](https://www.fermyon.com/)
 - [Fermyon Spin Serverless AI Inferencing with the spin framework](https://www.fermyon.com/serverless-ai)
 
-# Lets get coding!
+## Let's get coding!
 
 So what will we be using? Well, we'll be using:
 
 - [Emscripten](https://emscripten.org/): a compiler toolchain for WASM, used to compile C/C++ code(or any other lanugage that uses LLVM) to WASM.
 - [Raylib](https://www.raylib.com/): a cross-platform open-source software development library to create graphical applications and games.
 
-## Installation
+### Installation
 
 For Windows:
 

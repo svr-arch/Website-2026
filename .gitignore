@@ -29,3 +29,16 @@ Thumbs.db
 
 # Logs
 *.log
+
+.gemini
+.gemini/*
+.antigravity
+.antigravity/*
+conductor
+conductor/*
+
+.pi
+.pi/*
+
+thoughts
+thoughts/*

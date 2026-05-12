@@ -1,33 +1,100 @@
 {{ define "all-events"}}
 {{$PageData := index .DeepDataMerge.Collections .PageURL}}
 {{ template "head" .}}
-<body class="site-body">
-    {{template "header" .}}
-    <main class="container site-main" role="main">
-        <article class="content">
-            <section class="events-grid">
-                {{range $Post := index .DeepDataMerge.CollectionsMap .PageURL}}
-                <a class="event-card" href="/{{$Post.CompleteURL}}">
-                    <div class="event-card-inner">
-                        <div class="event-thumb">
-                            {{ if $Post.Frontmatter.PreviewImage }}
-                                <img src="{{$Post.Frontmatter.PreviewImage}}" alt="pixel art"/>
-                            {{ else }}
-                                <img src="/static/images/placeholder.png" alt="pls tell me what to put here"/>
-                            {{ end }}
-                        </div>
-                        <div class="event-info">
-                            <h3>{{$Post.Frontmatter.Title}}</h3>
-                            <p>{{$Post.Frontmatter.Description}}</p>
-                            <span class="event-date">{{$Post.Frontmatter.Date}}</span>
-                        </div>
-                    </div>
-                </a>
+<body class="site-body" 
+    on-keydown="
+        if(evt.shiftKey && evt.key === 'Q') {
+            let win = document.activeElement.closest('.niri-window') || document.querySelector('.niri-window:last-child');
+            if (win) window.closeNiriWindow(win);
+        }
+        if(evt.shiftKey && evt.key === 'F') {
+            let win = document.activeElement.closest('.niri-window');
+            if(win) {
+                win.classList.toggle('w-full');
+                setTimeout(() => {
+                    win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+                }, 310);
+            }
+        }
+        if(evt.key === 'd' || evt.key === 'D') {
+            document.body.classList.toggle('overview-mode');
+            if(!document.body.classList.contains('overview-mode')) {
+                let win = document.activeElement.closest('.niri-window');
+                if(win) win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+            }
+        }
+        if(evt.key === '/') {
+            let m = document.getElementById('help-modal');
+            if(m) m.open ? m.close() : m.showModal();
+            evt.preventDefault();
+        }
+    "
+    on-click="
+        let fab = evt.target.closest('.fab-overview');
+        if(fab) {
+            document.body.classList.toggle('overview-mode');
+            return;
+        }
+        
+        let closeBtn = evt.target.closest('.mobile-close-btn');
+        if(closeBtn) {
+            let win = closeBtn.closest('.niri-window');
+            if (win) window.closeNiriWindow(win);
+            return;
+        }
+        
+        let win = evt.target.closest('.niri-window');
+        let interactive = evt.target.closest('a, button, input');
+        if(win && !interactive) {
+            win.focus({ preventScroll: true });
+            if(document.body.classList.contains('overview-mode')) {
+                document.body.classList.remove('overview-mode');
+                setTimeout(() => {
+                    win.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+                }, 50);
+                evt.preventDefault();
+                evt.stopPropagation();
+            }
+        }
+    "
+>
+    <main class="niri-vertical-track" id="niri-track-v">
+        <div class="niri-horizontal-track" id="niri-track-h-root">
+            <section class="niri-window" id="root-window" role="main" tabindex="-1">
+                <div class="container site-main">
+                    <article class="content">
+                        <section class="events-grid">
+                {{range $key, $events := .DeepDataMerge.CollectionsMap}}
+                    {{if eq $key "collections/events.html"}}
+                        {{range $Post := $events}}
+                            {{if ne $Post.Frontmatter.Title "anna"}}
+                            <a class="event-card" href="/{{$Post.CompleteURL}}" fx-action="/{{$Post.CompleteURL}}">
+                                <div class="event-card-inner">
+                                    <div class="event-thumb">
+                                        {{ if $Post.Frontmatter.PreviewImage }}
+                                            <img src="{{$Post.Frontmatter.PreviewImage}}" alt="pixel art"/>
+                                        {{ else }}
+                                            <img src="/static/images/placeholder.png" alt="pls tell me what to put here"/>
+                                        {{ end }}
+                                    </div>
+                                    <div class="event-info">
+                                        <h3>{{$Post.Frontmatter.Title}}</h3>
+                                        <p>{{$Post.Frontmatter.Description}}</p>
+                                        <span class="event-date">{{$Post.Frontmatter.Date}}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            {{end}}
+                        {{end}}
+                    {{end}}
                 {{end}}
+                        </section>
+                    </article>
+                </div>
             </section>
-        </article>
+        </div>
+        {{template "footer" .}}
     </main>
-    {{template "footer" .}}
 </body>
 </html>
 {{ end}}

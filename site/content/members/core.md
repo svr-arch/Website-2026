@@ -1,6 +1,6 @@
 ---
-title: "Members"
-layout: all-members
+title: "Core Committee"
+layout: page
 customFields:
   - name: "Vinaayak"
     designation: "Chair"

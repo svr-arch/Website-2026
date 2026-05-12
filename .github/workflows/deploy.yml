@@ -58,6 +58,7 @@ jobs:
           find public -type f \( -name "*.html" -o -name "*.css" -o -name "*.xml" -o -name "*.js" \) -exec sed -i "s|url(/|url(/$REPO_NAME/|g" {} +
           find public -type f -name "*.html" -exec sed -i "s|fetch('/|fetch('/$REPO_NAME/|g" {} +
           find public -type f -name "*.html" -exec sed -i "s|a.href = '/|a.href = '/$REPO_NAME/|g" {} +
+          find public -type f -name "*.html" -exec sed -i "s|fx-action=\"/|fx-action=\"/$REPO_NAME/|g" {} +
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
