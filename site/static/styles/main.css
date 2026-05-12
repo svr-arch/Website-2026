@@ -1857,6 +1857,11 @@ a > code {
     transform: translateY(-14px) scale(1.04);
     box-shadow: 0 28px 60px rgba(2, 6, 23, 0.16);
 }
+@keyframes float {
+    0%   { transform: translateY(calc(var(--hover-y, 0px) + 0px))   scale(var(--hover-scale, 1)); }
+    50%  { transform: translateY(calc(var(--hover-y, 0px) + -8px))  scale(var(--hover-scale, 1)); }
+    100% { transform: translateY(calc(var(--hover-y, 0px) + 0px))   scale(var(--hover-scale, 1)); }
+}
 
 /* ── BLOGS (horizontal strips) ── */
 .blogs-list {
@@ -1869,16 +1874,16 @@ a > code {
     text-decoration: none;
     color: inherit;
     display: block;
-    animation: float 3s ease-in-out infinite;
     border-radius: 16px;
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+    --hover-y: 0px;
+    --hover-scale: 1;
+    animation: float 3s ease-in-out infinite;
+    transition: --hover-y 0.3s ease, --hover-scale 0.3s ease, box-shadow 0.3s ease;
 }
 
 .blog-card:hover {
-    animation: none;
-    transform: translateY(-6px) scale(1.01);
+    --hover-y: -6px;
+    --hover-scale: 1.01;
 }
 
 .blog-card-inner {
@@ -1948,6 +1953,8 @@ a > code {
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     overflow: hidden;
+    --hover-y: 0px;
+    --hover-scale: 1;
     animation: float 3s ease-in-out infinite;
     transition:
         transform 0.3s ease,
@@ -1956,10 +1963,11 @@ a > code {
 }
 
 .event-card:hover .event-card-inner {
-    animation: none;
-    transform: translateY(-10px) scale(1.02);
+    --hover-y: -10px;
+    --hover-scale: 1.02;
     box-shadow: 0 8px 24px rgba(0, 170, 254, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
+
 .event-thumb {
     height: 180px;
     overflow: hidden;
