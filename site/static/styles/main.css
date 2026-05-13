@@ -1875,15 +1875,6 @@ a > code {
     color: inherit;
     display: block;
     border-radius: 16px;
-    --hover-y: 0px;
-    --hover-scale: 1;
-    animation: float 3s ease-in-out infinite;
-    transition: --hover-y 0.3s ease, --hover-scale 0.3s ease, box-shadow 0.3s ease;
-}
-
-.blog-card:hover {
-    --hover-y: -6px;
-    --hover-scale: 1.01;
 }
 
 .blog-card-inner {
@@ -1953,9 +1944,6 @@ a > code {
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     overflow: hidden;
-    --hover-y: 0px;
-    --hover-scale: 1;
-    animation: float 3s ease-in-out infinite;
     transition:
         transform 0.3s ease,
         box-shadow 0.3s ease;
@@ -1963,8 +1951,6 @@ a > code {
 }
 
 .event-card:hover .event-card-inner {
-    --hover-y: -10px;
-    --hover-scale: 1.02;
     box-shadow: 0 8px 24px rgba(0, 170, 254, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
